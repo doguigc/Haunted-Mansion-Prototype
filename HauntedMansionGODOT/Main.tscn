@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Mob/Mob.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Main.gd" type="Script" id=3]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 30, 1, 30 )
@@ -8,7 +10,20 @@ extents = Vector3( 30, 1, 30 )
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 60, 2, 60 )
 
+[sub_resource type="CylinderMesh" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.92549, 0, 0, 1 )
+
+[sub_resource type="Curve3D" id=5]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -28.612, -2.23975, 28.3416, 0, 0, 0, 0, 0, 0, -27.9972, -2.86067, -27.8186, 0, 0, 0, 0, 0, 0, 28.4519, -3.0765, -28.0513, 0, 0, 0, 0, 0, 0, 28.2116, -3.04271, 28.3882, 0, 0, 0, 0, 0, 0, -27.4032, -2.38242, 29.0442, 0, 0, 0, 0, 0, 0, -28.612, -2.23975, 28.3416 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
+}
+
 [node name="Main" type="Node"]
+script = ExtResource( 3 )
+mob_scene = ExtResource( 2 )
 
 [node name="Ground" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0744152, -4.47036, 0.296162 )
@@ -20,6 +35,7 @@ shape = SubResource( 1 )
 mesh = SubResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 2.99985, -0.0300017, 0, 0.0299779, 2.99747, 0.119401, -0.00119408, -0.119395, 2.99762, -0.0374391, -2.48408, -0.0633526 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.998038, 0.0626163, 0, -0.0626163, 0.998038, 0, 0, 0, 1, 11.927, 27.0542, 10.5899 )
@@ -27,7 +43,46 @@ shadow_enabled = true
 shadow_bias = 2.187
 
 [node name="CameraPivot" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 9.53674e-07, -0.000720978, 0 )
 
 [node name="Camera" type="Camera" parent="CameraPivot"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19 )
+transform = Transform( 1, 0, 0, 0, 0.997354, -0.0726987, 0, 0.0726987, 0.997354, 0, 5.46046e-07, 19 )
+projection = 1
+fov = 44.8
+size = 15.0
+near = 0.07
+far = 82.5
+
+[node name="Cylinders" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Cylinders"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.8067, -2.41823, -28.919 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Cylinders"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.4983, -2.41823, -28.919 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="Cylinders"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.8067, -2.41823, 29.7584 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="Cylinders"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6552, -2.41823, 29.9153 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="SpawnPath" type="Path" parent="."]
+curve = SubResource( 5 )
+
+[node name="SpawnLocation" type="PathFollow" parent="SpawnPath"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.9451, 0, 29.0829 )
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
