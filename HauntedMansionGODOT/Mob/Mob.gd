@@ -9,9 +9,13 @@ export var max_speed = 18
 
 var velocity = Vector3.ZERO
 
+# Emitted when the player jumped on the mob.
+signal squashed
 
-func _physics_process(_delta):
-	move_and_slide(velocity)
+# ...
+
+
+
 
 
 # We will call this function from the Main scene.
@@ -37,6 +41,12 @@ func initialize(start_position, player_position):
 func _on_VisibilityNotifier_screen_exited():
 	queue_free()
 
+func squash():
+	emit_signal("squashed")
+	queue_free()
+
+func _physics_process(_delta):
+	move_and_slide(velocity)
 
 
 
