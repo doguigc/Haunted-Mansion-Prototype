@@ -5,6 +5,10 @@ export var speed = 14
 # The downward acceleration when in the air, in meters per second squared.
 export var fall_acceleration = 75
 
+# Emitted when the player was hit by a mob.
+# Put this at the top of the script.
+signal hit
+
 var velocity = Vector3.ZERO
 
 # Vertical impulse applied to the character upon jumping in meters per second.
@@ -50,4 +54,17 @@ func _physics_process(delta):
 	velocity.z = direction.z * speed
 	velocity.y -= fall_acceleration * delta
 	velocity = move_and_slide(velocity, Vector3.UP)
+
+
+
+
+# And this function at the bottom.
+func die():
+	emit_signal("hit")
+	queue_free()
+
+
+
+func _on_MobDetector_body_entered(_body):
+	die()
 
