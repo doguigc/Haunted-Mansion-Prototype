@@ -40,7 +40,6 @@ material/0 = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 2.99985, -0.0300017, 0, 0.0299892, 2.9986, 0.0864339, -0.00086439, -0.0864295, 2.99875, -0.0374391, -3.46019, -0.0633526 )
-collision_mask = 6
 
 [node name="CameraPivot" type="Position3D" parent="."]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0 )
@@ -103,4 +102,5 @@ light_color = Color( 0.270588, 0.913725, 0.219608, 1 )
 shadow_enabled = true
 omni_range = 16.952
 
+[connection signal="hit" from="Player" to="." method="_on_Player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]

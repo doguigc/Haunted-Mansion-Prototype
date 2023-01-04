@@ -25,7 +25,8 @@ func _physics_process(delta):
 		# We check every collision that occurred this frame.
 		var collision = get_slide_collision(index)
 		# If we collide with a monster...
-		if collision.collider.is_in_group("mob"):
+		
+		if collision.collider != null and collision.collider.is_in_group("mob"):
 			var mob = collision.collider
 			# ...we check that we are hitting it from above.
 			if Vector3.UP.dot(collision.normal) > 0.1:
@@ -55,9 +56,6 @@ func _physics_process(delta):
 	velocity.y -= fall_acceleration * delta
 	velocity = move_and_slide(velocity, Vector3.UP)
 
-
-
-
 # And this function at the bottom.
 func die():
 	emit_signal("hit")
@@ -65,6 +63,7 @@ func die():
 
 
 
-func _on_MobDetector_body_entered(_body):
-	die()
 
+
+func _on_Mobdetector_body_entered(body):
+	die()

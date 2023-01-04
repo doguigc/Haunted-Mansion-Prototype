@@ -2,7 +2,6 @@ extends Node
 
 export (PackedScene) var mob_scene
 
-
 func _ready():
 	randomize()
 
@@ -20,3 +19,7 @@ func _on_MobTimer_timeout():
 	mob.initialize(mob_spawn_location.translation, player_position)
 
 	add_child(mob)
+
+
+func _on_Player_hit():
+	$MobTimer.stop()
