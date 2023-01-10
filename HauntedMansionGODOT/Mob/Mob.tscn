@@ -4,7 +4,7 @@
 [ext_resource path="res://Mob/Mob.gd" type="Script" id=2]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.729623, 0.275139, 0.893948 )
+extents = Vector3( 0.768063, 0.275139, 1.04654 )
 
 [node name="Mob" type="KinematicBody" groups=["mob"]]
 collision_layer = 2

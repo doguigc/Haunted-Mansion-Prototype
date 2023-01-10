@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Undertale OST_ 054 - Hotel.mp3-7a0f08f7def7ccdb4c2aefef53360141.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/Undertale OST_ 054 - Hotel.mp3"
+dest_files=[ "res://.import/Undertale OST_ 054 - Hotel.mp3-7a0f08f7def7ccdb4c2aefef53360141.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
