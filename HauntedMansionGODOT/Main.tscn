@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Mob/Mob.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=3]
 [ext_resource path="res://materials/Floor.tres" type="Material" id=4]
+[ext_resource path="res://ScoreLabel.gd" type="Script" id=5]
+[ext_resource path="res://UI/DePixelKlein.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 30, 1, 30 )
@@ -21,6 +23,13 @@ _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -28.612, -2.23975, 28.3416, 0, 0, 0, 0, 0, 0, -27.9972, -2.86067, -27.8186, 0, 0, 0, 0, 0, 0, 28.4519, -3.0765, -28.0513, 0, 0, 0, 0, 0, 0, 28.2116, -3.04271, 28.3882, 0, 0, 0, 0, 0, 0, -27.4032, -2.38242, 29.0442, 0, 0, 0, 0, 0, 0, -28.612, -2.23975, 28.3416 ),
 "tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
 }
+
+[sub_resource type="DynamicFont" id=6]
+size = 26
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=7]
+default_font = SubResource( 6 )
 
 [node name="Main" type="Node"]
 script = ExtResource( 3 )
@@ -101,6 +110,40 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.0517, 0, 0 )
 light_color = Color( 0.270588, 0.913725, 0.219608, 1 )
 shadow_enabled = true
 omni_range = 16.952
+
+[node name="UserInterface" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 7 )
+
+[node name="ScoreLabel" type="Label" parent="UserInterface"]
+margin_left = 30.0
+margin_top = 17.0
+margin_right = 77.0
+margin_bottom = 31.0
+custom_colors/font_color = Color( 1, 0.960784, 0.0156863, 1 )
+text = "Score 0"
+script = ExtResource( 5 )
+
+[node name="Retry" type="ColorRect" parent="UserInterface"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0196078, 0.0235294, 0.0588235, 0.494118 )
+
+[node name="Text" type="Label" parent="UserInterface/Retry"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -109.0
+margin_top = -75.5
+margin_right = 109.0
+margin_bottom = 75.5
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+text = "Press Enter"
+percent_visible = -0.1
 
 [connection signal="hit" from="Player" to="." method="_on_Player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
