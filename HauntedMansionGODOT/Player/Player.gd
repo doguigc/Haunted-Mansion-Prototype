@@ -1,5 +1,9 @@
 extends KinematicBody
 
+onready var meleeattack = $Meleehitbox
+
+
+
 # How fast the player moves in meters per second.
 export var speed = 14
 # The downward acceleration when in the air, in meters per second squared.
@@ -7,7 +11,8 @@ export var fall_acceleration = 75
 
 # Emitted when the player was hit by a mob.
 # Put this at the top of the script.
-signal hit
+signal hit 
+
 
 var velocity = Vector3.ZERO
 
@@ -17,6 +22,9 @@ export var jump_impulse = 20
 # Vertical impulse applied to the character upon bouncing over a mob in
 # meters per second.
 export var bounce_impulse = 16
+
+
+
 
 func _physics_process(delta):
 	var direction = Vector3.ZERO
@@ -33,7 +41,11 @@ func _physics_process(delta):
 				# If so, we squash it and bounce.
 				mob.squash()
 				velocity.y = bounce_impulse
-
+	
+	
+	if Input.is_action_pressed("meleeattack"): 
+		attack()
+	
 	if Input.is_action_pressed("move_right"):
 		direction.x += 1
 	if Input.is_action_pressed("move_left"):
@@ -55,6 +67,17 @@ func _physics_process(delta):
 	velocity.z = direction.z * speed
 	velocity.y -= fall_acceleration * delta
 	velocity = move_and_slide(velocity, Vector3.UP)
+
+func attack():
+	for enemy in meleeattack.get_overlapping_bodies(): 
+		if enemy.is_in_group("player"):
+			print("cuerpos")
+		if enemy.is_in_group("mob"): 
+			print("enemigo")
+			enemy.health -= 100
+		if enemy.has_method("squash"): 
+			print("enemigo2")
+		
 
 # And this function at the bottom.
 func die():

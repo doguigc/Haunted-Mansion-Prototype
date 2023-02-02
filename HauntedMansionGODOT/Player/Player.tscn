@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Art/3DGodotRobot.glb" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
@@ -10,7 +10,11 @@ radius = 0.861412
 height = 0.500064
 radius = 0.886548
 
-[node name="Player" type="KinematicBody"]
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 4.09569, 2.97918, 2.87726 )
+
+[node name="Player" type="KinematicBody" groups=["player"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.142009 )
 collision_mask = 6
 script = ExtResource( 2 )
 
@@ -31,5 +35,12 @@ monitorable = false
 [node name="CollisionShape" type="CollisionShape" parent="Mobdetector"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.258402, 0 )
 shape = SubResource( 2 )
+
+[node name="Meleehitbox" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.226099, -0.129589 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Meleehitbox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0312346, 0.734489, 4.35046 )
+shape = SubResource( 3 )
 
 [connection signal="body_entered" from="Mobdetector" to="." method="_on_Mobdetector_body_entered"]

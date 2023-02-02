@@ -7,7 +7,7 @@
 extents = Vector3( 0.768063, 0.275139, 1.04654 )
 
 [node name="Mob" type="KinematicBody" groups=["mob"]]
-collision_layer = 2
+collision_layer = 3
 collision_mask = 0
 script = ExtResource( 2 )
 
@@ -23,5 +23,7 @@ shape = SubResource( 1 )
 [node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06837, 0 )
 aabb = AABB( -1.33104, -0.994114, -2.24389, 2.66209, 1.98823, 4.48777 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
 
 [connection signal="screen_exited" from="VisibilityNotifier" to="." method="_on_VisibilityNotifier_screen_exited"]
