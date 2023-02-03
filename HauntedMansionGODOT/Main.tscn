@@ -54,12 +54,10 @@ material/0 = ExtResource( 4 )
 [node name="caja" type="MeshInstance" parent="Ground"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6491, 2.00307, -1.03749 )
 mesh = SubResource( 9 )
-material/0 = null
 
 [node name="caja2" type="MeshInstance" parent="Ground"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8713, 2.00307, -12.9159 )
 mesh = SubResource( 9 )
-material/0 = null
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 2.99985, -0.0300017, 0, 0.0299892, 2.9986, 0.0864339, -0.00086439, -0.0864295, 2.99875, -0.0374391, -3.46019, -0.0633526 )
