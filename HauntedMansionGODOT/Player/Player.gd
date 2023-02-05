@@ -70,13 +70,9 @@ func _physics_process(delta):
 
 func attack():
 	for enemy in meleeattack.get_overlapping_bodies(): 
-		if enemy.is_in_group("player"):
-			print("cuerpos")
 		if enemy.is_in_group("mob"): 
-			print("enemigo")
 			enemy.health -= 100
-		if enemy.has_method("squash"): 
-			print("enemigo2")
+		
 		
 
 # And this function at the bottom.
